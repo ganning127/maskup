@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" type="image/png" href="./img/logo.png" />
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="./css/main.css">
+		<link rel="stylesheet" href="./css/notes.css">
+		<script type="module" src="script.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+		<title>MaskUp</title>
+	</head>
+
+	<body>
+		<nav class="navbar navbar-expand-md navbar-light">
+			<a class="navbar-brand bold-blue" href="index" style="font-size: 1.6rem">
+				<img src="./img/logo.png" alt="MaskUp Logo" width="80" height="80">
+				MaskUp
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-end mr-4" id="navbarText">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="detect">Detect <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="group">Group</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="notified">Get Notified</a>
+					</li>
+
+				</ul>
+
+
+				{{#private}}
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src='{{avatar}}' class="avatar">
+						</button>
+
+
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" onclick='logout()'>Log Out</a>
+							<a class="dropdown-item" href='symptom'>Symptoms</a>
+							<a class="dropdown-item" href='result'>Result</a>
+							<a class="dropdown-item" href='notes'>Notes</a>
+						</div>
+
+
+					</div>
+				{{/private}}
+
+				{{^private}}
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src='https://www.seekpng.com/png/detail/115-1150456_avatar-generic-avatar.png' class="avatar">
+						</button>
+
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href='signup'>Sign Up</a>
+							<a class="dropdown-item" href='login'>Login</a>
+						</div>
+
+					</div>
+				{{/private}}
+
+
+			</div>
+		</nav>
+
+		<div class="container mt-4">
+			<h1 class="bold-blue">Welcome to your notes!</h1>
+			<p class="blue">Here, you can keep track of your symptoms and how you feel everyday. Feel free to be as specific as possible, so you can tell how everything is progressing!</p>
+			<form action="/~/MaskUp/account/Notes" method="POST" enctype="multipart/form-data" class="mb-4">
+				<div class="form-group">
+					<textarea class="form-control" id="notesInput" type='textarea' name='notes' placeholder='How are you feeling today?' rows="3" required></textarea>
+				</div>
+				<input type="hidden" id="date" name="date" value="CurrentTime">
+				<input type="hidden" id="time" name="time" value="CurrentDate">
+				<input type="submit" value="Write!" role="button" class="btn hover-effect blue-hover">
+			</form>
+			<div class='results' id='results'></div>
+		</div>
+	</body>
+
+</html>

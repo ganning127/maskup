@@ -1,0 +1,55 @@
+:root {
+    --faded-blue: #80b0ca;
+    --bold-blue: #004e78;
+    --navbar: #f5f5f5;
+    --bright-blue: #bbf2f2;
+    --white: #ffffff;
+    --opac-blue: #88BBD6;
+}
+
+.jumbotron {
+    background: url('../img/indexback.png') center center no-repeat;
+    background-size: cover;
+}
+
+.jumbotron .row {
+    min-height: 50vh;
+}
+/*.box {*/
+/*    background-color: var(--bright-blue);*/
+/*    border-radius: 15px;*/
+/*    padding: 2rem;*/
+/*}*/
+
+
+
+.img-container {
+    max-height: 500px;
+    overflow: hidden;
+}
+
+.card img {
+    overflow: hidden;
+}
+
+.card {
+	margin: 0 auto;
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 400px;
+}
+.card-title {
+    color: var(--bold-blue);
+}
+.card-text, .faded-blue {
+    color: var(--faded-blue);
+}
+
+form {
+	max-width: 700px;
+	margin: 0 auto;
+}
+.form-control {
+	border-radius: 20px;
+	border: 2px solid var(--opac-blue);
+}

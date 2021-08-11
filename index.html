@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" type="image/png" href="./img/logo.png" />
+
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+		<link rel="stylesheet" href="./css/main.css">
+		<link rel="stylesheet" href="./css/index.css">
+		<meta property="og:title" content="MaskUp" />
+		<meta name="description" content="MaskUp - live mask detection, symptom tracker, statistics organizer." />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://easybag98.qoom.space/~/MaskUp" />
+		<meta property="og:image" content="https://i.imgur.com/hh74DBY.png" />
+		<meta property="og:site_name" content="MaskUp" />
+		<title>MaskUp</title>
+	</head>
+
+	<body>
+
+
+		<nav class="navbar navbar-expand-md navbar-light">
+			<a class="navbar-brand bold-blue" href="index" style="font-size: 1.6rem">
+				<img src="./img/logo.png" alt="MaskUp Logo" width="60" height="60">
+				MaskUp
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-end mr-4" id="navbarText">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="detect">Detect <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="group">Group</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="notified">Get Notified</a>
+					</li>
+
+				</ul>
+
+
+				{{#private}}
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src='{{avatar}}' class="avatar">
+						</button>
+
+
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" onclick='logout()'>Log Out</a>
+							<a class="dropdown-item" href='symptom'>Symptoms</a>
+							<a class="dropdown-item" href='result'>Result</a>
+							<a class="dropdown-item" href='notes'>Notes</a>
+						</div>
+
+
+					</div>
+				{{/private}}
+
+				{{^private}}
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src='https://www.seekpng.com/png/detail/115-1150456_avatar-generic-avatar.png' class="avatar">
+						</button>
+
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href='signup'>Sign Up</a>
+							<a class="dropdown-item" href='login'>Login</a>
+						</div>
+
+					</div>
+				{{/private}}
+
+
+			</div>
+		</nav>
+
+		<section class="main">
+			<div class="jumbotron jumbotron-fluid">
+				<div class="container text-center">
+
+					<div class="row">
+						<div class="col-md-7 d-flex align-items-center">
+							<div>
+								<h1 class="bold-blue display-3" id="cases"></h1>
+								<h1 class="bold-blue display-3" id="deaths"></h1>
+							</div>
+						</div>
+						<div class="col-md-5 d-flex align-items-center justify-content-center">
+							<div id="circle" class="d-flex align-items-center justify-content-center shadow-transparent">
+								<img src="./img/logo.png" alt="logo" class="img-fluid">
+							</div>
+						</div>
+					</div>
+
+					<div class="buttons">
+						<a href="detect"><button class="btn hover-effect blue-hover">Live Detection</button></a>
+						<a href="group"><button class="btn hover-effect blue-hover">Group Detection</button></a>
+					</div>
+
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 bold-blue">
+						<h3 class="bold-blue">What is MaskUp?</h3>
+						<p class="mt-4">MaskUp is a web app designed to help prevent the spread of the novel coronavirus and collect
+							COVID-19 data. Using both live and photo detection, MaskUp can tell whether a person is responsibly wearing a mask or not. MaskUp could be used in public spaces worldwide to only allow entry to those who are wearing
+							face masks. For example, the success message could set off a trigger, allowing a door to open. </p>
+						<p class="mt-4">Additionally, MaskUp allows you to track and save your symptoms based on when you experienced them. You can take notes on how you're feeling, as well as log your specific symptoms. Whether it's a medical emergency or a health checkup, you can open MaskUp and let your doctor have a better understanding of your situation for a more accurate diagnosis. </p>
+					</div>
+					<div class="col-md-4">
+						<div class="box d-flex align-items-center justify-content-center shadow-grey">
+							<img src="./img/indexwhat.png" alt="virus image" class="img-fluid">
+						</div>
+					</div>
+				</div>
+
+				<div class="separator"></div>
+				<div class="row">
+					<div class="col-md-8 bold-blue order-md-last">
+						<h3 class="bold-blue">Why was MaskUp Created?</h3>
+						<p class="mt-4"><em>198.6 million</em>: the number of COVID-19 cases thus far.<br />
+							<em>4.2 million: the appalling worldwide
+								death toll due to COVID-19.</em>
+							Social distancing and mask-wearing mandates have slackened. When going out for groceries, we observe more
+							and more people ditching their masks because they've "gotten the vaccines already" or because they have "the
+							right to breathe". However, what they don't see are the daunting numbers of people who end up hospitalized,
+							even after getting their vaccines. Furthermore, masks protect everybody from all kinds of airborne diseases,
+							including the common cold, chickenpox, measles, tuberculosis, and pneumonia. MaskUp was created so that
+							those who neglect their masks can be highlighted and reminded to keep their masks on.
+						</p>
+					</div>
+					<div class="col-md-4 order-md-first">
+						<div class="box d-flex align-items-center justify-content-center shadow-grey mb-4">
+							<img src="./img/indexwhy.png" alt="virus image" class="img-fluid">
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+		<div class="separator"></div>
+
+		<section>
+			<div class="container">
+				<h1 class="text-center team bold-blue">MaskUp Team</h1>
+				<p class="lead text-center blue">MaskUp was created in Summer 2021</p>
+
+				<div class="row row-cols-2 row-cols-md-2">
+					<div class="col mb-4">
+						<div class="card">
+							<div class="img-container d-flex align-items-center">
+								<img src="./img/ganning.jpg" class="card-img-top" alt="Ganning Xu">
+							</div>
+
+							<div class="card-body">
+								<h5 class="card-title font-weight-bolder">Ganning Xu</h5>
+								<p class="card-text font-italic">High School Junior</p>
+								<p class="card-text">Hi there! I'm Ganning, a junior at North Carolina's School of Science and Math. I
+									created MaskUp as a way to streamline mask detection, especially in the wake of the Covid-19 pandemic.
+								</p>
+
+							</div>
+							<button type="button" class="btn hover-effect blue-hover mb-2" data-toggle="modal" data-target="#ganningMore">About Me</button>
+
+						</div>
+					</div>
+
+					<div class="col mb-4">
+						<div class="card">
+							<div class="img-container d-flex align-items-center">
+								<img src="./img/elise.png" class="card-img-top" alt="Elise Tong">
+							</div>
+
+							<div class="card-body">
+								<h5 class="card-title font-weight-bolder">Elise Tong</h5>
+								<p class="card-text font-italic">High School Junior</p>
+								<p class="card-text">Hello! I'm Elise, a junior at Largo High School. My brother is a General Surgery
+									resident who receives overwhelming numbers of COVID-19 patients that end up in the ICU. A vast
+									majority are people who refuse to wear masks on their outings and refuse to have their vaccines, but
+									soon regret their decisions. MaskUp will help minimize the number of people who disregard their masks,
+									as well as remind users to get their vaccines!</p>
+
+							</div>
+							<button type="button" class="btn hover-effect blue-hover mb-2" data-toggle="modal" data-target="#eliseMore">About Me</button>
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+
+		<div class="separator"></div>
+
+		<section>
+			<div class="container">
+				<h1 class="text-center team bold-blue">Vaccine Locator</h1>
+				<p class="lead text-center blue">Want to get your vaccines, but don't know where to go? Use this free vaccine locator to find
+					the nearest vaccination stations!</p>
+				<iframe src="https://www.vaccinatethestates.com/embed?lat=38.05&lng=-95.727&zoom=3.603" width="100%" height="600" frameborder="0" allow="geolocation" allowfullscreen=""></iframe>
+			</div>
+		</section>
+
+		<div class="separator"></div>
+
+		<section>
+			<div class="container">
+				<h1 class="text-center bold-blue">Contact Us</h1>
+				<form action="https://formsubmit.co/cf366e20951190483e1fd1d159fabf5c" method="POST" />
+				<input type="text" name="_honey" style="display:none">
+				<input type="hidden" name="_autoresponse" value="Your message to MaskUp has been received!">
+				<div class="row">
+					<div class="col">
+						<input type="text" class="form-control" placeholder="Name" name="name" required>
+					</div>
+					<div class="col">
+						<input type="text" class="form-control" placeholder="Email" name="email" required>
+					</div>
+				</div>
+
+				<div class="mt-3">
+					<textarea class="form-control" id="validationTextarea" placeholder="Message" name="message" required></textarea>
+				</div>
+
+				<div class="text-center mt-3">
+					<input type="submit" class="btn hover-effect faded-blue-hover mx-auto">
+				</div>
+				</form>
+			</div>
+		</section>
+
+		<div class="separator"></div>
+
+		<hr />
+		<!-- Footer -->
+		<footer class="text-center text-lg-start faded-blue">
+			<!-- Section: Social media -->
+			<!-- Section: Social media -->
+
+			<!-- Section: Links  -->
+			<section class="">
+				<div class="container text-center text-md-start mt-5">
+					<!-- Grid row -->
+					<div class="row mt-3">
+						<!-- Grid column -->
+						<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+							<!-- Content -->
+							<h6 class="text-uppercase fw-bold mb-4 bold-blue">
+								<i class="fas fa-hospital-user me-3 bold-blue"></i> MaskUp
+							</h6>
+							<p>
+								MaskUp is a web app that uses machine learning to detect whether or not a user, or group of people have a
+								mask on!
+							</p>
+						</div>
+						<!-- Grid column -->
+
+
+						<!-- Grid column -->
+						<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+							<!-- Links -->
+							<h6 class="text-uppercase fw-bold mb-4 bold-blue">
+								<i class="fas fa-link -user me-3 bold-blue"></i> Useful links
+							</h6>
+							<p>
+								<a href="#" class="text-reset">Home</a>
+							</p>
+							<p>
+								<a href="detect.html" class="text-reset">Detect</a>
+							</p>
+							<p>
+								<a href="group.html" class="text-reset">Group Detect</a>
+							</p>
+							<p>
+								<a href="notified.html" class="text-reset">Get Notified</a>
+							</p>
+						</div>
+						<!-- Grid column -->
+
+						<!-- Grid column -->
+						<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+							<!-- Links -->
+							<h6 class="text-uppercase fw-bold mb-4 bold-blue">
+								<i class="fas fa-id-card -user me-3 bold-blue"></i> Contact
+							</h6>
+							<i class="fas fa-home"></i> Morrisville, NC, 27560
+
+							<i class="fas fa-envelope me-3"></i>
+							maskuporg@gmail.com
+
+							<i class="fas fa-phone me-3"></i>(919) 527-9302
+						</div>
+						<!-- Grid column -->
+					</div>
+					<!-- Grid row -->
+				</div>
+			</section>
+			<!-- Section: Links  -->
+
+			<!-- Copyright -->
+			<div class="text-center cpy p-4" style="background-color: transparent;">
+				© 2021 Copyright:
+				<a class="text-reset fw-bold" href="#">MaskUp</a>
+			</div>
+			<!-- Copyright -->
+		</footer>
+		<!-- Footer -->
+
+
+		<!-- [DO NOT EDIT BELOW] modals -->
+
+		<div class="modal fade" id="ganningMore" tabindex="-1" aria-labelledby="ganningModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title bold-blue" id="ganningModalLabel">Ganning</h3>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<h5 class="bold-blue">About</h5>
+						<ul class="about list-unstyled">
+							<li>
+								<p><span class="font-weight-bold opac-blue">Pronouns: </span>He/Him</p>
+							</li>
+							<li>
+								<p><span class="font-weight-bold opac-blue">My Hobbies: </span>Outside of coding, I enjoy going swimming, biking,
+									and hanging out with friends. I also really like trying out new foods around the world! My favorite food
+									right now is hotpot, but it always changes very fast haha!</p>
+							</li>
+						</ul>
+						<h5 class="bold-blue">Contact</h5>
+						<ul class="about list-unstyled">
+							<li>
+								<p><span class="font-weight-bold opac-blue">Email: </span>ganningxu@gmail.com</p>
+							</li>
+							<li>
+								<p><span class="font-weight-bold opac-blue">Instagram: </span>@ganning_xu</p>
+							</li>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn hover-effect faded-blue-hover" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="eliseMore" tabindex="-1" aria-labelledby="ganningModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="modal-title bold-blue" id="ganningModalLabel">Elise</h3>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<h5 class="bold-blue">About</h5>
+						<ul class="about list-unstyled">
+							<li>
+								<p><span class="font-weight-bold opac-blue">Pronouns: </span>She/Her</p>
+							</li>
+							<li>
+								<p><span class="font-weight-bold opac-blue">My Hobbies: </span>I love to read, write, dance (especially ballet!),
+									bake, eat, do STEM activities, and code. A big rule that I stand by is that you can never go wrong
+									with chocolates and sweets!</p>
+							</li>
+						</ul>
+						<h5 class="bold-blue">Contact</h5>
+						<ul class="about list-unstyled">
+							<li>
+								<p><span class="font-weight-bold opac-blue">Email: </span>elise@tongworld.com</p>
+							</li>
+							<li>
+								<p><span class="font-weight-bold opac-blue">Instagram: </span>@elisetongworld</p>
+							</li>
+						</ul>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn hover-effect faded-blue-hover" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.7/js/tether.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+
+		<script src="./js/main.js"></script>
+		<script src="./js/covid.js"></script>
+
+	</body>
+
+</html>
